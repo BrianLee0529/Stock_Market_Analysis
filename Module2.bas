@@ -73,11 +73,34 @@ Sub CreateScript()
     End If
     Next I
     
+    ' Find the highest and lowest percentage change
+    Dim maxPercentageChange As Double
+    Dim minPercentageChange As Double
+    Dim maxPercentageChangeTicker As String
+    Dim minPercentageChangeTicker As String
     
+    maxPercentageChange = Application.WorksheetFunction.Max(Range("K2:K" & Summary_Table_Row - 1))
+    minPercentageChange = Application.WorksheetFunction.Min(Range("K2:K" & Summary_Table_Row - 1))
     
+    maxPercentageChangeTicker = Cells(Application.WorksheetFunction.Match(maxPercentageChange, Range("K2:K" & Summary_Table_Row - 1), 0) + 1, 9).Value
+    minPercentageChangeTicker = Cells(Application.WorksheetFunction.Match(minPercentageChange, Range("K2:K" & Summary_Table_Row - 1), 0) + 1, 9).Value
     
+    ' Output to cells
+    Range("P2").Value = maxPercentageChangeTicker
+    Range("Q2").Value = maxPercentageChange
+    Range("P3").Value = minPercentageChangeTicker
+    Range("Q3").Value = minPercentageChange
     
+    ' Find the highest volume
+    Dim Max_Volume As Double
+    Dim maxVolumeTicker As String
     
+    Max_Volume = Application.WorksheetFunction.Max(Range("L2:L" & Summary_Table_Row - 1))
+    maxVolumeTicker = Cells(Application.WorksheetFunction.Match(Max_Volume, Range("L2:L" & Summary_Table_Row - 1), 0) + 1, 9).Value
+    
+    ' Output to cells
+    Range("P4").Value = maxVolumeTicker
+    Range("Q4").Value = Max_Volume 
     Next WS
  
  End Sub
